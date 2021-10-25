@@ -85,7 +85,7 @@ genre and explore new songs. They can swipe left or right based on whether or no
 * Playlists list / Playlist details 
 
 ## Wireframes
-<img src="low-fidelity-wireframe.jpg" width=600>
+<img src="/digitalwireframes/low-fidelity-wireframe.jpg" width=600>
 
 ### [BONUS] Digital Wireframes & Mockups
 <img src="/digitalwireframes/app_login.jpg" width=300> <img src="/digitalwireframes/app_signup.jpg" width=300> <img src="/digitalwireframes/app_main.jpg" width=300> <img src="/digitalwireframes/app_songfinder.jpg" width=300>  <img src="/digitalwireframes/app_songfinder2.jpg" width=300> <img src="/digitalwireframes/app_chat.jpg" width=300>
