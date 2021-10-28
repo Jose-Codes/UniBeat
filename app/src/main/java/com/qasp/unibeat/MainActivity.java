@@ -13,10 +13,12 @@ import com.spotify.android.appremote.api.ConnectionParams;
 import com.spotify.android.appremote.api.Connector;
 import com.spotify.android.appremote.api.SpotifyAppRemote;
 import com.spotify.protocol.types.Track;
+import com.wrapper.spotify.SpotifyApi;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String CLIENT_ID = "eadf0460915145b2b48616ffdd35476a";
+    private static final String CLIENT_ID = "2097dfc9223f4d4eba7946ba43ecfef7";
+    public static final String SECRET_ID = "c88476935a384a62ba85de48b25b8c60";
     private static final String REDIRECT_URI = "com.qasp.unibeat://callback";
     private SpotifyAppRemote mSpotifyAppRemote;
 
@@ -28,6 +30,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        SpotifyApi spotifyApi = new SpotifyApi.Builder()
+                .setClientId(CLIENT_ID)
+                .setClientSecret(SECRET_ID)
+                .build();
+
+        String accessToken = spotifyApi.getAccessToken();
+        System.out.println(accessToken);
+
 
         btnStop = findViewById(R.id.btnStop);
 
