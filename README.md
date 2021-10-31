@@ -90,7 +90,75 @@ genre and explore new songs. They can swipe left or right based on whether or no
 ### [BONUS] Digital Wireframes & Mockups
 <img src="/digitalwireframes/app_login.jpg" width=300> <img src="/digitalwireframes/app_signup.jpg" width=300> <img src="/digitalwireframes/app_main.jpg" width=300> <img src="/digitalwireframes/app_songfinder.jpg" width=300>  <img src="/digitalwireframes/app_songfinder2.jpg" width=300> <img src="/digitalwireframes/app_chat.jpg" width=300>
 <img src="/digitalwireframes/app_profile.jpg" width=300> <img src="/digitalwireframes/app_settings.jpg" width=300> <img src="/digitalwireframes/app_done.jpg" width=300> <img src="/digitalwireframes/app_songinfo.jpg" width=300>
-### [BONUS] Interactive Prototype
+
+### Schema: 
+
+## Models
+
+# *Song*
+
+| Property | Type | Description|
+|---------|---------| ---------|
+| songID | String | Unique ID for the song |
+| Author | String | The artist of the Song |
+| Genre | String | Genre of the song | 
+| Related Songs| List <song> | A list of songs related to the song played |
+| Song Image | String | The thumbnail of the song | 
+| Lyrics | String | If available, the lyrics of the song that is currently playing | 
+
+
+# *User*
+  | Property | Type | Description|
+|---------|---------| ---------| 
+| Name | String | Name of the user |
+| Profile Pic URI | String | Picture uploaded by the user | 
+| About Me | String | A brief description about the user | 
+| Liked Songs | List<song> | A list of the user’s favorite songs |
+| Location | String | Where the user is located |
+| User matches | List<Users> | A list of users that are matched to the current user |
+| Seen Songs | List<song> | List of songs that the user has already seen so it is not shown again |
+
+
+# *Networking*
+
+Spotify API:
+Song Finder
+- (Read/GET) Query songs from a specific genre.
+- (GET) New song (URI, title, time, etc…)
+- (POST) Create a playlist in Spotify from firebase
+- (POST) Add song to a Spotify playlist 
+
+_song Finder (more information view)_
+- (GET) Related songs
+- Note for the two above, the get request for “New Song” might already get the data.
+
+_Profile_
+(Read/GET) Image URI and Track Name From Favorite Songs 
+
+
+_Firebase API_
+  
+Home Screen:
+- (GET) List of Genres
+
+Profile:
+- (GET) Username, description, profile pic, favorite songs
+
+Settings:
+- (GET) Full name, email, social handle, profile pic
+
+Song Finder: 
+- (POST) Add song to favorites
+- (POST) Add song to liked
+  
+Messages:
+- (GET) Chatrooms with messages (including read/unread)
+- (POST) Send messages to others
+- (GET) New matches that are not chatted with yet
+
+
+Base URL: https://api.spotify.com/v1
+Existing API endpoints:
 
 | HTTP Verb | Endpoint | Description|
 |---------|---------| ---------|
