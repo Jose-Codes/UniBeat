@@ -91,11 +91,11 @@ genre and explore new songs. They can swipe left or right based on whether or no
 <img src="/digitalwireframes/app_login.jpg" width=300> <img src="/digitalwireframes/app_signup.jpg" width=300> <img src="/digitalwireframes/app_main.jpg" width=300> <img src="/digitalwireframes/app_songfinder.jpg" width=300>  <img src="/digitalwireframes/app_songfinder2.jpg" width=300> <img src="/digitalwireframes/app_chat.jpg" width=300>
 <img src="/digitalwireframes/app_profile.jpg" width=300> <img src="/digitalwireframes/app_settings.jpg" width=300> <img src="/digitalwireframes/app_done.jpg" width=300> <img src="/digitalwireframes/app_songinfo.jpg" width=300>
 
-### Schema: 
+# Schema: 
 
 ## Models
 
-# *Song*
+### *Song*
 
 | Property | Type | Description|
 |---------|---------| ---------|
@@ -107,7 +107,7 @@ genre and explore new songs. They can swipe left or right based on whether or no
 | Lyrics | String | If available, the lyrics of the song that is currently playing | 
 
 
-# *User*
+### *User*
   | Property | Type | Description|
 |---------|---------| ---------| 
 | Name | String | Name of the user |
@@ -119,7 +119,7 @@ genre and explore new songs. They can swipe left or right based on whether or no
 | Seen Songs | List<song> | List of songs that the user has already seen so it is not shown again |
 
 
-# *Networking*
+### *Networking*
 
 Spotify API:
 Song Finder
