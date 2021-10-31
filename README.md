@@ -92,11 +92,13 @@ genre and explore new songs. They can swipe left or right based on whether or no
 <img src="/digitalwireframes/app_profile.jpg" width=300> <img src="/digitalwireframes/app_settings.jpg" width=300> <img src="/digitalwireframes/app_done.jpg" width=300> <img src="/digitalwireframes/app_songinfo.jpg" width=300>
 ### [BONUS] Interactive Prototype
 
-## Schema 
-[This section will be completed in Unit 9]
-### Models
-[Add table of models]
-### Networking
-- [Add list of network requests by screen ]
-- [Create basic snippets for each Parse network request]
-- [OPTIONAL: List endpoints if using existing API such as Yelp]
+| HTTP Verb | Endpoint | Description|
+|---------|---------| ---------|
+|Get |/tracks/id | Gets the track|
+| Get| /tracks/id | Gets the track with a different uri as the last one, after seeing if the user has already listened to it.| 
+| Post | users/user_id/playlist | Creates a new playlist in spotify |
+| Post | playlists/playlist_id/track | Add a song to a Spotify playlist |
+| Get | /tracks/id | Get Image URL from the track information |
+| GET | /tracks/id | Get track name from the track information |
+
+
