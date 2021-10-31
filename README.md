@@ -106,7 +106,6 @@ genre and explore new songs. They can swipe left or right based on whether or no
 | Song Image | String | The thumbnail of the song | 
 | Lyrics | String | If available, the lyrics of the song that is currently playing | 
 
-
 ### *User*
   | Property | Type | Description|
 |---------|---------| ---------| 
@@ -118,10 +117,9 @@ genre and explore new songs. They can swipe left or right based on whether or no
 | User matches | List<Users> | A list of users that are matched to the current user |
 | Seen Songs | List<song> | List of songs that the user has already seen so it is not shown again |
 
-
 ### *Networking*
 
-Spotify API:
+_Spotify API:_
 Song Finder
 - (Read/GET) Query songs from a specific genre.
 - (GET) New song (URI, title, time, etc…)
@@ -156,7 +154,6 @@ Messages:
 - (POST) Send messages to others
 - (GET) New matches that are not chatted with yet
 
-
 Base URL: https://api.spotify.com/v1
 Existing API endpoints:
 
@@ -168,5 +165,3 @@ Existing API endpoints:
 | Post | playlists/playlist_id/track | Add a song to a Spotify playlist |
 | Get | /tracks/id | Get Image URL from the track information |
 | GET | /tracks/id | Get track name from the track information |
-
-
