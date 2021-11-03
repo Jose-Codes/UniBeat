@@ -13,12 +13,14 @@ import com.spotify.android.appremote.api.ConnectionParams;
 import com.spotify.android.appremote.api.Connector;
 import com.spotify.android.appremote.api.SpotifyAppRemote;
 import com.spotify.protocol.types.Track;
-import com.wrapper.spotify.SpotifyApi;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Scanner;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String CLIENT_ID = "2097dfc9223f4d4eba7946ba43ecfef7";
-    public static final String SECRET_ID = "c88476935a384a62ba85de48b25b8c60";
+    private static final String CLIENT_ID = "eadf0460915145b2b48616ffdd35476a";
     private static final String REDIRECT_URI = "com.qasp.unibeat://callback";
     private SpotifyAppRemote mSpotifyAppRemote;
 
@@ -30,15 +32,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        SpotifyApi spotifyApi = new SpotifyApi.Builder()
-                .setClientId(CLIENT_ID)
-                .setClientSecret(SECRET_ID)
-                .build();
-
-        String accessToken = spotifyApi.getAccessToken();
-        System.out.println(accessToken);
-
 
         btnStop = findViewById(R.id.btnStop);
 
@@ -61,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
+
         ConnectionParams connectionParams =
                 new ConnectionParams.Builder(CLIENT_ID)
                         .setRedirectUri(REDIRECT_URI)
@@ -80,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Throwable throwable) {
-                        Log.e("MainActivity", throwable.getMessage());
+                        Log.e("MainActivity", "" + throwable.getMessage());
 
                         // Something went wrong when attempting to connect! Handle errors here
                         final String appPackageName = "com.spotify.music";
@@ -106,8 +100,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void connected() {
-        // Then we will write some more code here.
-        mSpotifyAppRemote.getPlayerApi().play("spotify:playlist:37i9dQZF1DX2sUQwD7tbmL");
+        InputStream inputStream = null;
+        try {
+            inputStream = getApplicationContext().getAssets().open("songs.txt");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Scanner s = new Scanner(inputStream).useDelimiter("\\A");
+        String result = s.hasNext() ? s.next() : "";
+
+
+        mSpotifyAppRemote.getPlayerApi().play(result);
 
         mSpotifyAppRemote.getPlayerApi()
                 .subscribeToPlayerState()
@@ -122,8 +126,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        // Aaand we will finish off here.
-
         SpotifyAppRemote.disconnect(mSpotifyAppRemote);
     }
 }
