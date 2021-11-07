@@ -1,23 +1,20 @@
-package com.qasp.unibeat;
+package com.qasp.unibeat.fragments;
 
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.qasp.unibeat.fragments.ChatFragment;
-import com.qasp.unibeat.fragments.HomeFragment;
-import com.qasp.unibeat.fragments.ProfileFragment;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+
+import com.qasp.unibeat.R;
 import com.spotify.android.appremote.api.ConnectionParams;
 import com.spotify.android.appremote.api.Connector;
 import com.spotify.android.appremote.api.SpotifyAppRemote;
@@ -27,50 +24,50 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Scanner;
 
-public class MainActivity extends AppCompatActivity {
+public class HomeFragment extends Fragment {
+
+    Button btnStop;
+    boolean isPlaying = true;
 
     private static final String CLIENT_ID = "eadf0460915145b2b48616ffdd35476a";
     private static final String REDIRECT_URI = "com.qasp.unibeat://callback";
     private SpotifyAppRemote mSpotifyAppRemote;
 
-    private BottomNavigationView bottomNavigationView;
-    final FragmentManager fragmentManager = getSupportFragmentManager();
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        bottomNavigationView = findViewById(R.id.bottomNavigation);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Fragment fragment = null;
-                switch (item.getItemId()) {
-                    case R.id.action_home:
-                        fragment = new HomeFragment();
-                        Toast.makeText(MainActivity.this, "Home", Toast.LENGTH_SHORT).show();
-                        break;
-                    case R.id.action_chat:
-                        fragment = new ChatFragment();
-                        Toast.makeText(MainActivity.this, "Chats", Toast.LENGTH_SHORT).show();
-                        break;
-                    case R.id.action_profile:
-                        fragment = new ProfileFragment();
-                        Toast.makeText(MainActivity.this, "Profile", Toast.LENGTH_SHORT).show();
-                    default:
-                        break;
-                }
-                fragmentManager.beginTransaction().replace(R.id.flContainer, fragment).commit();
-                return true;
-            }
-        });
-        // Set default selection
-        bottomNavigationView.setSelectedItemId(R.id.action_home);
+    public HomeFragment() {
+        // Required empty public constructor
     }
 
+    // The onCreateView method is called when Fragment should create its View object hierarchy,
     @Override
-    protected void onStart() {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_home, container, false);
+    }
+
+    // This event is triggered soon after onCreateView().
+    // Any view setup should occur here.  E.g., view lookups and attaching view listeners.
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        btnStop = view.findViewById(R.id.btnStop);
+
+        btnStop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isPlaying) {
+                    mSpotifyAppRemote.getPlayerApi().pause();
+                    isPlaying = false;
+                } else if (!(isPlaying)) {
+                    mSpotifyAppRemote.getPlayerApi().resume();
+                    isPlaying = true;
+                }
+
+            }
+        });
+    }
+    @Override
+    public void onStart() {
         super.onStart();
 
 
@@ -80,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
                         .showAuthView(true)
                         .build();
 
-        SpotifyAppRemote.connect(this, connectionParams,
+        SpotifyAppRemote.connect(getContext(), connectionParams,
                 new Connector.ConnectionListener() {
 
                     @Override
@@ -121,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
     private void connected() {
         InputStream inputStream = null;
         try {
-            inputStream = getApplicationContext().getAssets().open("songs.txt");
+            inputStream = getContext().getAssets().open("songs.txt");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -143,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onStop() {
+    public void onStop() {
         super.onStop();
         SpotifyAppRemote.disconnect(mSpotifyAppRemote);
     }
