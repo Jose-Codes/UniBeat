@@ -20,6 +20,11 @@ genre and explore new songs. They can swipe left or right based on whether or no
 - **Scope:** It would start as a simple application connected with Spotify, but it can later be extended to other applications like SoundCloud, as well as expand on users music choices and their ability to communicate with people.
 ## Product Spec
 
+## Build Progress
+### Sprint 1
+<img src="walkthrough1.gif" width=600>
+
+
 ### 1. User Stories (Required and Optional)
 
 **Required Must-have Stories**
