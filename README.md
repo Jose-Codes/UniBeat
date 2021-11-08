@@ -107,7 +107,7 @@ genre and explore new songs. They can swipe left or right based on whether or no
 
 | Property | Type | Description|
 |---------|---------| ---------|
-| songID | String | Unique ID for the song |
+| SongID | String | Unique ID for the song |
 | Author | String | The artist of the Song |
 | Genre | String | Genre of the song | 
 | Related Songs| List <song> | A list of songs related to the song played |
