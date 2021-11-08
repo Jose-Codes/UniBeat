@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.HomeFragment">
+
+    <ImageView
+        android:id="@+id/ivSongImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="centerInside"
+        tools:src="@tools:sample/avatars"/>
+
+    <Button
+        android:id="@+id/btnStop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvArtistName"
+        android:layout_alignParentStart="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="139dp"
+        android:text="Play/Pause"
+        tools:layout_editor_absoluteY="393dp" />
+
+    <TextView
+        android:id="@+id/tvSongName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ivSongImage"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="146dp"
+        android:text="TextView"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvArtistName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvSongName"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="143dp"
+        android:text="TextView" />
+
+    <Button
+        android:id="@+id/btnDislike"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnStop"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="38dp"
+        android:layout_marginTop="46dp"
+        android:text="no" />
+
+    <Button
+        android:id="@+id/btnLike"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnStop"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="249dp"
+        android:layout_marginTop="48dp"
+        android:text="yes" />
+
+    <Button
+        android:id="@+id/btnDone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="128dp"
+        android:text="Done" />
+
+</RelativeLayout>
