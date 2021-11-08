@@ -31,13 +31,16 @@ genre and explore new songs. They can swipe left or right based on whether or no
 
 * [ ] Users can register for an account 
 * [ ] Users can log in to their account
+* [X] Users can authorize spotify to use our app
 * [X] User must pick genre before entering the songfinder
 * [X] Users will see the songfinder *Main page*
+* [X] User can play / pause a song
 * [ ] User can replay a song
 * [ ] User can favorite a song
-* [ ] Users can see their profile with a playlist, favorites, and connections(stretch) section
+* [ ] Users can see their profile with a bio, playlist(stretch), favorites, and connections(stretch) section
 * [ ] Users can see related artists and songs information when they swipe up
-* [ ] Song plays for users and they can either swipe right or left
+* [X] Song plays for users and they can either like it or dislike it
+* [X] User can choose to add all of their liked songs to their Spotify playlist
 
 
 
