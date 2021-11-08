@@ -29,29 +29,29 @@ genre and explore new songs. They can swipe left or right based on whether or no
 
 **Required Must-have Stories**
 
-* Users can register for an account 
-* Users can log in to their account
-* User must pick genre before entering the songfinder
-* Users will see the songfinder *Main page*
-* User can replay a song
-* User can favorite a song
-* Users can see their profile with a playlist, favorites, and connections(stretch) section
-* Users can see related artists and songs information when they swipe up
-* 30 second clip of a song plays for users and they can either swipe right or left
+* [ ] Users can register for an account 
+* [ ] Users can log in to their account
+* [X] User must pick genre before entering the songfinder
+* [X] Users will see the songfinder *Main page*
+* [ ] User can replay a song
+* [ ] User can favorite a song
+* [ ] Users can see their profile with a playlist, favorites, and connections(stretch) section
+* [ ] Users can see related artists and songs information when they swipe up
+* [ ] Song plays for users and they can either swipe right or left
 
 
 
 **Optional Nice-to-have Stories**
 
-* Users can have groupchats and private messages
-* Can see each other in maps
-* Search for other users
-* User can have a favorite songs on profile
-* Current genre that they are exploring
-* Change background color based on Genre **
-* Users can explore other user's playlists and connect with other users
-* Click on the song and listen to it
-* User can see upcoming concerts in their area related to their music taste
+* [ ] Users can have groupchats and private messages
+* [ ] Can see each other in maps
+* [ ] Search for other users
+* [ ] User can have a favorite songs on profile
+* [ ] Current genre that they are exploring
+* [ ] Change background color based on Genre **
+* [ ] Users can explore other user's playlists and connect with other users
+* [ ] Click on the song and listen to it
+* [ ] User can see upcoming concerts in their area related to their music taste
 
 ### 2. Screen Archetypes
 
