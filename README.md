@@ -122,8 +122,8 @@ genre and explore new songs. They can swipe left or right based on whether or no
 | About Me | String | A brief description about the user | 
 | Liked Songs | List<song> | A list of the user’s favorite songs |
 | Location | String | Where the user is located |
-| User matches | List<Users> | A list of users that are matched to the current user |
-| Seen Songs | List<song> | List of songs that the user has already seen so it is not shown again |
+| Matches | List<Users> | A list of users that are matched to the current user |
+| Viewed Songs | List<song> | List of songs that the user has already seen so it is not shown again |
 
 ### *Networking*
 
