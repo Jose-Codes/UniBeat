@@ -90,6 +90,7 @@ public class PlayerFragment extends Fragment {
         btnDislike = view.findViewById(R.id.btnDislike);
 
         btnDone = view.findViewById(R.id.btnDone);
+        
 
         btnDone.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "343454998854",
+    "project_id": "unibeat-2eaa8",
+    "storage_bucket": "unibeat-2eaa8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:343454998854:android:317a5fef5d135de09b4547",
+        "android_client_info": {
+          "package_name": "com.qasp.unibeat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "343454998854-6s0hsudmf5us34idj5nhm0rb8ujeg2hk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBNPVGTJIHK5FBzfVWR8sNLuixxIde_KV8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "343454998854-6s0hsudmf5us34idj5nhm0rb8ujeg2hk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
