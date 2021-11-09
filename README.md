@@ -20,33 +20,41 @@ genre and explore new songs. They can swipe left or right based on whether or no
 - **Scope:** It would start as a simple application connected with Spotify, but it can later be extended to other applications like SoundCloud, as well as expand on users music choices and their ability to communicate with people.
 ## Product Spec
 
+## Build Progress
+### Sprint 1
+<img src="walkthrough1.gif" width=600>
+
+
 ### 1. User Stories (Required and Optional)
 
 **Required Must-have Stories**
 
-* Users can register for an account 
-* Users can log in to their account
-* User must pick genre before entering the songfinder
-* Users will see the songfinder *Main page*
-* User can replay a song
-* User can favorite a song
-* Users can see their profile with a playlist, favorites, and connections(stretch) section
-* Users can see related artists and songs information when they swipe up
-* 30 second clip of a song plays for users and they can either swipe right or left
+* [ ] Users can register for an account 
+* [ ] Users can log in to their account
+* [X] Users can authorize spotify to use our app
+* [X] User must pick genre before entering the songfinder
+* [X] Users will see the songfinder *Main page*
+* [X] User can play / pause a song
+* [ ] User can replay a song
+* [ ] User can favorite a song
+* [ ] Users can see their profile with a bio, playlist(stretch), favorites, and connections(stretch) section
+* [ ] Users can see related artists and songs information when they swipe up
+* [X] Song plays for users and they can either like it or dislike it
+* [X] User can choose to add all of their liked songs to their Spotify playlist
 
 
 
 **Optional Nice-to-have Stories**
 
-* Users can have groupchats and private messages
-* Can see each other in maps
-* Search for other users
-* User can have a favorite songs on profile
-* Current genre that they are exploring
-* Change background color based on Genre **
-* Users can explore other user's playlists and connect with other users
-* Click on the song and listen to it
-* User can see upcoming concerts in their area related to their music taste
+* [ ] Users can have groupchats and private messages
+* [ ] Can see each other in maps
+* [ ] Search for other users
+* [ ] User can have a favorite songs on profile
+* [ ] Current genre that they are exploring
+* [ ] Change background color based on Genre **
+* [ ] Users can explore other user's playlists and connect with other users
+* [ ] Click on the song and listen to it
+* [ ] User can see upcoming concerts in their area related to their music taste
 
 ### 2. Screen Archetypes
 
@@ -99,7 +107,7 @@ genre and explore new songs. They can swipe left or right based on whether or no
 
 | Property | Type | Description|
 |---------|---------| ---------|
-| songID | String | Unique ID for the song |
+| SongID | String | Unique ID for the song |
 | Author | String | The artist of the Song |
 | Genre | String | Genre of the song | 
 | Related Songs| List <song> | A list of songs related to the song played |
@@ -114,8 +122,8 @@ genre and explore new songs. They can swipe left or right based on whether or no
 | About Me | String | A brief description about the user | 
 | Liked Songs | List<song> | A list of the user’s favorite songs |
 | Location | String | Where the user is located |
-| User matches | List<Users> | A list of users that are matched to the current user |
-| Seen Songs | List<song> | List of songs that the user has already seen so it is not shown again |
+| Matches | List<Users> | A list of users that are matched to the current user |
+| Viewed Songs | List<song> | List of songs that the user has already seen so it is not shown again |
 
 ### *Networking*
 
