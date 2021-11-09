@@ -97,7 +97,7 @@ public class PlayerFragment extends Fragment {
             public void onClick(View view) {
                 for (int i = 0; i < songs.size(); i++) {
                     mSpotifyAppRemote.getUserApi().addToLibrary(songs.get(i));
-                    Toast.makeText(getContext(), "Songs Added to Spotify!", Toast.LENGTH_SHORT);
+                    Toast.makeText(getContext(), "Songs Added to Spotify!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
