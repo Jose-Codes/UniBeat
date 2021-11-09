@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,7 +33,7 @@ import java.util.Scanner;
 
 public class PlayerFragment extends Fragment {
 
-    Button btnStop;
+    ImageButton btnStop;
     boolean isPlaying = true;
 
     private static final String CLIENT_ID = "eadf0460915145b2b48616ffdd35476a";
@@ -44,8 +45,8 @@ public class PlayerFragment extends Fragment {
     TextView tvSongName;
     TextView tvArtistName;
 
-    Button btnLike;
-    Button btnDislike;
+    ImageButton btnLike;
+    ImageButton btnDislike;
 
     Button btnDone;
 
