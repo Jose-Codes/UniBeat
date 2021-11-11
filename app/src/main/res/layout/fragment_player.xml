@@ -66,7 +66,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvSongName"
-        android:layout_alignStart="@id/tvSongName"
+        android:layout_centerHorizontal="true"
         android:layout_marginStart="1dp"
         android:fontFamily="@font/nunitoregular"
         android:text="by: Song Artist" />
