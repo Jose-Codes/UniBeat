@@ -232,9 +232,7 @@ public class PlayerFragment extends Fragment {
                         public void onClick(View view) {
                             Animation shake = AnimationUtils.loadAnimation(getContext(), R.anim.buttonanimation);
                             btnLike.startAnimation(shake);
-
                             songs.add(track.uri);
-                            String nextSong;
                             mSpotifyAppRemote.getPlayerApi().skipNext();
                         }
                     });
@@ -259,6 +257,7 @@ public class PlayerFragment extends Fragment {
         Scanner s = new Scanner(inputStream).useDelimiter("\\n");
         String result = s.next();
         mSpotifyAppRemote.getPlayerApi().play(result);
+        mSpotifyAppRemote.getPlayerApi().skipNext();
         mSpotifyAppRemote.getPlayerApi()
                 .subscribeToPlayerState()
                 .setEventCallback(mPlayerStateEventCallback);
