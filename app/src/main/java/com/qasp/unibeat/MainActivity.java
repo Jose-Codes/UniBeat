@@ -28,6 +28,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.qasp.unibeat.firebase.Database;
 import com.qasp.unibeat.fragments.ChatFragment;
 import com.qasp.unibeat.fragments.HomeFragment;
 import com.qasp.unibeat.fragments.ProfileFragment;
@@ -55,12 +56,16 @@ public class MainActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
     final FragmentManager fragmentManager = getSupportFragmentManager();
 
+    Button btnSignIn;
+    Button btnSignOut;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         bottomNavigationView = findViewById(R.id.bottomNavigation);
 
+        Database db = new Database();
 
         // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -69,7 +74,6 @@ public class MainActivity extends AppCompatActivity {
                 .build();
 
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-
         mAuth = FirebaseAuth.getInstance();
 
         signIn();
@@ -108,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void signOut(){
-        FirebaseAuth.getInstance().signOut();
+        mAuth.signOut();
     }
 
     @Override
