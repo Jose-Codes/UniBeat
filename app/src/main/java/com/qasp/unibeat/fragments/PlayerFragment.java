@@ -1,15 +1,21 @@
 package com.qasp.unibeat.fragments;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatSeekBar;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -17,6 +23,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,8 +31,9 @@ import com.qasp.unibeat.R;
 import com.spotify.android.appremote.api.ConnectionParams;
 import com.spotify.android.appremote.api.Connector;
 import com.spotify.android.appremote.api.SpotifyAppRemote;
-import com.spotify.protocol.types.HelloDetails;
+import com.spotify.protocol.client.Subscription;
 import com.spotify.protocol.types.Image;
+import com.spotify.protocol.types.PlayerState;
 import com.spotify.protocol.types.Track;
 
 import java.io.IOException;
@@ -36,12 +44,13 @@ import java.util.Scanner;
 public class PlayerFragment extends Fragment {
 
     ImageButton btnStop;
+    ImageView ivPausePlay;
     boolean isPlaying = true;
 
     private static final String CLIENT_ID = "eadf0460915145b2b48616ffdd35476a";
     private static final String REDIRECT_URI = "com.qasp.unibeat://callback";
     public static final String TAG = "MainActivity";
-    private SpotifyAppRemote mSpotifyAppRemote;
+    private static SpotifyAppRemote mSpotifyAppRemote;
 
     ImageView ivSongImage;
     TextView tvSongName;
@@ -49,12 +58,14 @@ public class PlayerFragment extends Fragment {
 
     ImageButton btnLike;
     ImageButton btnDislike;
+    ImageView ivBackground;
 
     Button btnDone;
 
 
     ArrayList<String> songs = new ArrayList<>();
-
+    AppCompatSeekBar mSeekBar;
+    TrackProgressBar mTrackProgressBar;
 
     // The onCreateView method is called when Fragment should create its View object hierarchy,
     @Override
@@ -69,7 +80,17 @@ public class PlayerFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        mSeekBar = view.findViewById(R.id.seekBar);
+        mSeekBar.setEnabled(false);
+        //mSeekBar.getProgressDrawable().setColorFilter(getResources().getColor(R.color.unibeatred), PorterDuff.Mode.SRC_ATOP);
+        //mSeekBar.getThumb().setColorFilter(getResources().getColor(R.color.unibeatred), PorterDuff.Mode.SRC_ATOP);
+        mTrackProgressBar = new TrackProgressBar(mSeekBar);
+        ivBackground = view.findViewById(R.id.ivBackground);
+
+
         btnStop = view.findViewById(R.id.btnStop);
+        ivPausePlay = view.findViewById(R.id.ivPausePlay);
 
         btnStop.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,7 +114,7 @@ public class PlayerFragment extends Fragment {
         btnDislike = view.findViewById(R.id.btnDislike);
 
         btnDone = view.findViewById(R.id.btnDone);
-        
+
 
         btnDone.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,14 +122,19 @@ public class PlayerFragment extends Fragment {
                 for (int i = 0; i < songs.size(); i++) {
                     mSpotifyAppRemote.getUserApi().addToLibrary(songs.get(i));
                     Toast.makeText(getContext(), "Songs Added to Spotify!", Toast.LENGTH_SHORT).show();
+                    SpotifyAppRemote.disconnect(mSpotifyAppRemote);
+                    getFragmentManager().beginTransaction().replace(R.id.flContainer, new HomeFragment()).commit();
                 }
             }
         });
     }
 
+
     @Override
     public void onStart() {
         super.onStart();
+
+
         ConnectionParams connectionParams =
                 new ConnectionParams.Builder(CLIENT_ID)
                         .setRedirectUri(REDIRECT_URI)
@@ -121,17 +147,8 @@ public class PlayerFragment extends Fragment {
                     @Override
                     public void onConnected(SpotifyAppRemote spotifyAppRemote) {
                         mSpotifyAppRemote = spotifyAppRemote;
-                        Log.d("MainActivity", "Connected! Yay!");
                         // Now you can start interacting with App Remote
-                        String genre = getArguments().getString("Genre");
-                        switch(genre) {
-                            case "Country":
-                                connected("country.txt");
-                                break;
-                            case "Rock":
-                                connected("rock.txt");
-                                break;
-                        }
+                        pickGenreAndThemes();
                     }
 
                     @Override
@@ -161,25 +178,14 @@ public class PlayerFragment extends Fragment {
                 });
     }
 
-    private void connected(String fileName) {
-        InputStream inputStream = null;
-        try {
-            inputStream = getContext().getAssets().open(fileName);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        Scanner s = new Scanner(inputStream).useDelimiter("\\n");
-        String result = s.next();
-        Log.i(TAG, result);
-
-        mSpotifyAppRemote.getPlayerApi().play(result);
-
-        mSpotifyAppRemote.getPlayerApi()
-                .subscribeToPlayerState()
-                .setEventCallback(playerState -> {
+    private final Subscription.EventCallback<PlayerState> mPlayerStateEventCallback =
+            new Subscription.EventCallback<PlayerState>() {
+                @Override
+                public void onEvent(PlayerState playerState) {
                     final Track track = playerState.track;
                     if (track != null) {
+                        mSeekBar.setMax((int) playerState.track.duration);
+                        Log.i(TAG, String.valueOf((int) playerState.track.duration));
                         Log.d("MainActivity", track.name + " by " + track.artist.name + " Song Image URI: " + track.imageUri);
                         mSpotifyAppRemote
                                 .getImagesApi()
@@ -193,6 +199,34 @@ public class PlayerFragment extends Fragment {
                     tvSongName.setText(track.name);
                     tvArtistName.setText("by: " + track.artist.name);
 
+                    // Update progressbar
+                    if (playerState.playbackSpeed > 0) {
+                        mTrackProgressBar.unpause();
+                    } else {
+                        mTrackProgressBar.pause();
+                    }
+
+                    // Invalidate play / pause
+                    if (playerState.isPaused) {
+                        ivPausePlay.setImageResource(R.drawable.playimage);
+                    } else {
+                        ivPausePlay.setImageResource(R.drawable.pauseimage);
+                    }
+                    if (playerState.track != null) {
+                        // Invalidate seekbar length and position
+                        mSeekBar.setMax((int) playerState.track.duration);
+                        mTrackProgressBar.setDuration(playerState.track.duration);
+                        mTrackProgressBar.update(playerState.playbackPosition);
+                    }
+
+                    mSeekBar.setEnabled(true);
+                    mSeekBar.setOnTouchListener(new View.OnTouchListener() {
+                        @Override
+                        public boolean onTouch(View v, MotionEvent event) {
+                            return true;
+                        }
+                    });
+
                     btnLike.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -201,32 +235,122 @@ public class PlayerFragment extends Fragment {
 
                             songs.add(track.uri);
                             String nextSong;
-                            if((nextSong = s.next()) != null){
-                                Log.i("MainActivity", nextSong);
-                                mSpotifyAppRemote.getPlayerApi().play(nextSong);
-                            }
-
+                            mSpotifyAppRemote.getPlayerApi().skipNext();
                         }
                     });
                     btnDislike.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            String nextSong;
-                            if((nextSong = s.next()) != null){
-                                Log.i("MainActivity", nextSong);
-                                mSpotifyAppRemote.getPlayerApi().play(nextSong);
-                            }
+                            mSpotifyAppRemote.getPlayerApi().skipNext();
                         }
                     });
-                });
+                }
+            };
 
+    private void connected(String fileName) {
 
+        InputStream inputStream = null;
+        try {
+            inputStream = getContext().getAssets().open(fileName);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
+        Scanner s = new Scanner(inputStream).useDelimiter("\\n");
+        String result = s.next();
+        mSpotifyAppRemote.getPlayerApi().play(result);
+        mSpotifyAppRemote.getPlayerApi()
+                .subscribeToPlayerState()
+                .setEventCallback(mPlayerStateEventCallback);
     }
 
     @Override
     public void onStop() {
         super.onStop();
         SpotifyAppRemote.disconnect(mSpotifyAppRemote);
+    }
+    public void pickGenreAndThemes(){
+        String genre = getArguments().getString("Genre");
+        switch (genre) {
+            case "Country":
+                int country = getResources().getColor(R.color.country);
+                ivBackground.setColorFilter(country);
+                mSeekBar.getProgressDrawable().setColorFilter(country, PorterDuff.Mode.SRC_ATOP);
+                mSeekBar.getThumb().setColorFilter(country, PorterDuff.Mode.SRC_ATOP);
+                btnDone.setTextColor(country);
+                btnStop.setColorFilter(country, PorterDuff.Mode.SRC_ATOP);
+                connected("country.txt");
+                break;
+            case "Rock":
+                int rock = getResources().getColor(R.color.rock);
+                ivBackground.setColorFilter(rock);
+                mSeekBar.getProgressDrawable().setColorFilter(rock, PorterDuff.Mode.SRC_ATOP);
+                mSeekBar.getThumb().setColorFilter(rock, PorterDuff.Mode.SRC_ATOP);
+                btnDone.setTextColor(rock);
+                btnStop.setColorFilter(rock, PorterDuff.Mode.SRC_ATOP);
+                connected("rock.txt");
+                break;
+        }
+    }
+
+    class TrackProgressBar {
+
+        private static final int LOOP_DURATION = 500;
+        private final SeekBar mSeekBar;
+        private final Handler mHandler;
+
+        private final SeekBar.OnSeekBarChangeListener mSeekBarChangeListener =
+                new SeekBar.OnSeekBarChangeListener() {
+
+
+                    @Override
+                    public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                    }
+
+                    @Override
+                    public void onStartTrackingTouch(SeekBar seekBar) {
+
+                    }
+
+                    @Override
+                    public void onStopTrackingTouch(SeekBar seekBar) {
+                        mSpotifyAppRemote
+                                .getPlayerApi()
+                                .seekTo(seekBar.getProgress());
+                    }
+                };
+
+        protected final Runnable mSeekRunnable =
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        int progress = mSeekBar.getProgress();
+                        mSeekBar.setProgress(progress + LOOP_DURATION);
+                        mHandler.postDelayed(mSeekRunnable, LOOP_DURATION);
+                    }
+                };
+
+        protected TrackProgressBar(SeekBar seekBar) {
+            mSeekBar = seekBar;
+            mSeekBar.setOnSeekBarChangeListener(mSeekBarChangeListener);
+            mHandler = new Handler();
+        }
+
+        protected void setDuration(long duration) {
+            mSeekBar.setMax((int) duration);
+        }
+
+        protected void update(long progress) {
+            mSeekBar.setProgress((int) progress);
+        }
+
+        protected void pause() {
+            mHandler.removeCallbacks(mSeekRunnable);
+        }
+
+        protected void unpause() {
+            mHandler.removeCallbacks(mSeekRunnable);
+            mHandler.postDelayed(mSeekRunnable, LOOP_DURATION);
+        }
     }
 }
