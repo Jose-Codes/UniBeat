@@ -32,11 +32,12 @@ genre and explore new songs. They can swipe left or right based on whether or no
 **Required Must-have Stories**
 
 * [ ] Users can register for an account 
-* [ ] Users can log in to their account
+* [x] Users can log in to their account
 * [X] Users can authorize spotify to use our app
 * [X] User must pick genre before entering the songfinder
 * [X] Users will see the songfinder *Main page*
 * [X] User can play / pause a song
+* [x] User can view a progress bar of the song.
 * [ ] User can replay a song
 * [ ] User can favorite a song
 * [ ] Users can see their profile with a bio, playlist(stretch), favorites, and connections(stretch) section
