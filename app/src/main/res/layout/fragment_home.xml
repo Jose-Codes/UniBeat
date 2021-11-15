@@ -1,29 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.HomeFragment">
 
-    <Button
-        android:id="@+id/btnGenreCountry"
+    <ImageButton
+        android:id="@+id/btnCountry"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/btnLike"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="266dp"
-        android:layout_marginTop="61dp"
-        android:text="Country" />
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="273dp"
+        android:layout_marginTop="71dp"
+        android:background="@null"
+        android:src="@drawable/btngenrecountry" />
 
-    <Button
-        android:id="@+id/btnGenreRock"
+    <ImageButton
+        android:id="@+id/btnRock"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/btnDislike"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="34dp"
-        android:layout_marginTop="63dp"
-        android:text="Rock" />
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="49dp"
+        android:layout_marginTop="72dp"
+        android:background="@null"
+        android:contentDescription="@string/genre"
+        android:src="@drawable/btngenrerock" />
 
 </RelativeLayout>

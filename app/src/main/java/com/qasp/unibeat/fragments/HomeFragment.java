@@ -1,37 +1,22 @@
 package com.qasp.unibeat.fragments;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.ImageButton;
 
 import com.qasp.unibeat.R;
-import com.spotify.android.appremote.api.ConnectionParams;
-import com.spotify.android.appremote.api.Connector;
-import com.spotify.android.appremote.api.SpotifyAppRemote;
-import com.spotify.protocol.types.Image;
-import com.spotify.protocol.types.Track;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 public class HomeFragment extends Fragment {
 
-    Button btnGenreRock;
-    Button btnGenreCountry;
+    ImageButton btnGenreRock;
+    ImageButton btnGenreCountry;
 
     // The onCreateView method is called when Fragment should create its View object hierarchy,
     @Override
@@ -45,8 +30,8 @@ public class HomeFragment extends Fragment {
     // Any view setup should occur here.  E.g., view lookups and attaching view listeners.
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        btnGenreCountry = view.findViewById(R.id.btnGenreCountry);
-        btnGenreRock = view.findViewById(R.id.btnGenreRock);
+        btnGenreCountry = view.findViewById(R.id.btnCountry);
+        btnGenreRock = view.findViewById(R.id.btnRock);
 
         btnGenreCountry.setOnClickListener(new View.OnClickListener() {
             @Override
