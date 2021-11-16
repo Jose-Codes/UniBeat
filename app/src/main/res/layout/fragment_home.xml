@@ -7,27 +7,171 @@
     android:layout_height="match_parent"
     tools:context=".fragments.HomeFragment">
 
-    <ImageButton
-        android:id="@+id/btnCountry"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageView
+        android:id="@+id/ivBackground"
+        android:layout_width="match_parent"
+        android:layout_height="450dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="273dp"
-        android:layout_marginTop="71dp"
-        android:background="@null"
-        android:src="@drawable/btngenrecountry" />
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="-250dp"
+        android:layout_marginBottom="350dp"
+        android:src="@drawable/background" />
 
-    <ImageButton
-        android:id="@+id/btnRock"
+    <ImageView
+        android:id="@+id/ivAppTitle"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/genretitle" />
+
+
+    <LinearLayout
+        android:id="@+id/llFour"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="49dp"
-        android:layout_marginTop="72dp"
-        android:background="@null"
-        android:contentDescription="@string/genre"
-        android:src="@drawable/btngenrerock" />
+        android:layout_below="@id/llThree"
+        android:layout_centerHorizontal="true">
+
+        <ImageButton
+            android:id="@+id/btnMood"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="15dp"
+            android:background="@null"
+            android:src="@drawable/genremood" />
+
+        <ImageButton
+            android:id="@+id/btnLatino"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="15dp"
+            android:background="@null"
+            android:contentDescription="@string/genre"
+            android:src="@drawable/genrelatino" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llOne"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ivBackground"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="-380dp">
+
+        <ImageButton
+            android:id="@+id/btnMood"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_margin="5dp"
+            android:background="@null"
+            android:src="@drawable/genrecountry" />
+
+        <ImageButton
+            android:id="@+id/btnLatino"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_margin="5dp"
+            android:background="@null"
+            android:contentDescription="@string/genre"
+            android:src="@drawable/genrerock" />
+
+        <ImageButton
+            android:id="@+id/btnRnb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:background="@null"
+            android:contentDescription="@string/genre"
+            android:src="@drawable/genrernb" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llTwo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/llOne"
+        android:layout_centerHorizontal="true">
+
+        <ImageButton
+            android:id="@+id/btnMood"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="15dp"
+            android:background="@null"
+            android:src="@drawable/genreblues" />
+
+        <ImageButton
+            android:id="@+id/btnLatino"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="15dp"
+            android:background="@null"
+            android:contentDescription="@string/genre"
+            android:src="@drawable/genredecades" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llThree"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/llTwo"
+        android:layout_centerHorizontal="true">
+
+        <ImageButton
+            android:id="@+id/btnHipHop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_margin="5dp"
+            android:background="@null"
+            android:contentDescription="@string/genre"
+            android:src="@drawable/genrehiphop" />
+
+        <ImageButton
+            android:id="@+id/btnMood"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_margin="5dp"
+            android:background="@null"
+            android:src="@drawable/genrejazz" />
+
+        <ImageButton
+            android:id="@+id/btnLatino"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_margin="5dp"
+            android:background="@null"
+            android:contentDescription="@string/genre"
+            android:src="@drawable/genrepunk" />
+
+    </LinearLayout>
 
 </RelativeLayout>
