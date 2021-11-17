@@ -30,8 +30,8 @@ public class HomeFragment extends Fragment {
     // Any view setup should occur here.  E.g., view lookups and attaching view listeners.
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        btnGenreCountry = view.findViewById(R.id.btnMood);
-        btnGenreRock = view.findViewById(R.id.btnLatino);
+        btnGenreCountry = view.findViewById(R.id.btnBlues);
+        btnGenreRock = view.findViewById(R.id.btnRock);
 
         btnGenreCountry.setOnClickListener(new View.OnClickListener() {
             @Override
