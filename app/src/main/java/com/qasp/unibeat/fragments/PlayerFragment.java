@@ -272,24 +272,46 @@ public class PlayerFragment extends Fragment {
         String genre = getArguments().getString("Genre");
         switch (genre) {
             case "Country":
-                int country = getResources().getColor(R.color.country);
-                ivBackground.setColorFilter(country);
-                mSeekBar.getProgressDrawable().setColorFilter(country, PorterDuff.Mode.SRC_ATOP);
-                mSeekBar.getThumb().setColorFilter(country, PorterDuff.Mode.SRC_ATOP);
-                btnDone.setTextColor(country);
-                btnStop.setColorFilter(country, PorterDuff.Mode.SRC_ATOP);
-                connected("country.txt");
+                changeColorsAndConnect(R.color.country, "country.txt");
                 break;
             case "Rock":
-                int rock = getResources().getColor(R.color.rock);
-                ivBackground.setColorFilter(rock);
-                mSeekBar.getProgressDrawable().setColorFilter(rock, PorterDuff.Mode.SRC_ATOP);
-                mSeekBar.getThumb().setColorFilter(rock, PorterDuff.Mode.SRC_ATOP);
-                btnDone.setTextColor(rock);
-                btnStop.setColorFilter(rock, PorterDuff.Mode.SRC_ATOP);
-                connected("rock.txt");
+                changeColorsAndConnect(R.color.rock, "rock.txt");
+                break;
+            case "Rnb":
+                changeColorsAndConnect(R.color.rock, "rock.txt");
+                break;
+            case "Blues":
+                changeColorsAndConnect(R.color.rock, "rock.txt");
+                break;
+            case "Decades":
+                changeColorsAndConnect(R.color.rock, "rock.txt");
+                break;
+            case "HipHop":
+                changeColorsAndConnect(R.color.rock, "rock.txt");
+                break;
+            case "Jazz":
+                changeColorsAndConnect(R.color.rock, "rock.txt");
+                break;
+            case "Punk":
+                changeColorsAndConnect(R.color.rock, "rock.txt");
+                break;
+            case "Mood":
+                changeColorsAndConnect(R.color.rock, "rock.txt");
+                break;
+            case "Latino":
+                changeColorsAndConnect(R.color.rock, "rock.txt");
                 break;
         }
+    }
+    
+    void changeColorsAndConnect(int colorVal, String textFile){
+        int color = getResources().getColor(colorVal);
+        ivBackground.setColorFilter(color);
+        mSeekBar.getProgressDrawable().setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
+        mSeekBar.getThumb().setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
+        btnDone.setTextColor(color);
+        btnStop.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
+        connected("country.txt");
     }
 
     class TrackProgressBar {
