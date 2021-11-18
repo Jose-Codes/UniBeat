@@ -7,10 +7,10 @@
     tools:context=".fragments.ProfileFragment">
 
     <Button
-        android:id="@+id/btnSignIn"
+        android:id="@+id/btnEditProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sign In" />
+        android:text="Edit Profile" />
 
     <Button
         android:id="@+id/btnSignOut"

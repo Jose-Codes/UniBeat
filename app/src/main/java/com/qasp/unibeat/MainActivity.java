@@ -2,6 +2,7 @@ package com.qasp.unibeat;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -10,6 +11,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -29,6 +34,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.qasp.unibeat.firebase.Database;
+import com.qasp.unibeat.firebase.SignUp;
+import com.qasp.unibeat.firebase.User;
 import com.qasp.unibeat.fragments.ChatFragment;
 import com.qasp.unibeat.fragments.HomeFragment;
 import com.qasp.unibeat.fragments.ProfileFragment;
@@ -40,6 +47,7 @@ import com.spotify.protocol.types.Track;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MainActivity extends AppCompatActivity {
@@ -49,15 +57,17 @@ public class MainActivity extends AppCompatActivity {
     private SpotifyAppRemote mSpotifyAppRemote;
 
     private static final int RC_SIGN_IN = 9001;
-    private static final String TAG = "LoginFragment";
+    private static final String TAG = "MainActivity";
     private GoogleSignInClient mGoogleSignInClient;
     private FirebaseAuth mAuth;
+    private Database db;
+    private User userData;
+    public static int RC_SIGN_UP = 1337;
 
     private BottomNavigationView bottomNavigationView;
     final FragmentManager fragmentManager = getSupportFragmentManager();
 
-    Button btnSignIn;
-    Button btnSignOut;
+    ActivityResultLauncher<Intent> activityResultLauncher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         bottomNavigationView = findViewById(R.id.bottomNavigation);
 
-        Database db = new Database();
+        db = new Database();
 
         // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -76,7 +86,18 @@ public class MainActivity extends AppCompatActivity {
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
         mAuth = FirebaseAuth.getInstance();
 
+        if(getIntent().getStringExtra("Email") != null &&
+                !(getIntent().getStringExtra("Email").equals(""))){
+            userData = new User();
+            userData.setName(getIntent().getStringExtra("Name"));
+            userData.setLocation(getIntent().getStringExtra("Location"));
+
+            db.setUserInfo(userData, getIntent().getStringExtra("Email"));
+        }
+
         signIn();
+
+
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -106,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void signIn() {
+    public void signIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
@@ -118,6 +139,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
+
 
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
@@ -139,8 +162,25 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser != null) {
+//            db.getUserInfo(currentUser.getEmail(), (user) -> {
+//                Log.i("MainActivity", user.getName());
+//            });
+            db.getUserInfo(currentUser.getEmail(), (user) -> {
+                Log.i("MainActivity", user.getName());
+                userData = user;
+                Log.i(TAG, "Loaded User Data");
+            }, () -> {
+               Log.i(TAG, "User does not have an account");
+            });
+        }
+        else {
+            signIn();
+        }
         // updateUI(currentUser);
     }
+
+
 
     private void firebaseAuthWithGoogle(String idToken) {
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);

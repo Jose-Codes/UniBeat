@@ -1,5 +1,6 @@
 package com.qasp.unibeat.firebase;
 
+import android.annotation.SuppressLint;
 import android.util.Log;
 
 import com.google.android.gms.tasks.Task;
@@ -12,43 +13,49 @@ import com.google.firestore.v1.WriteResult;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Consumer;
 
 public class Database {
+
 
     FirebaseFirestore firestore;
 
     public Database(){
         firestore = FirebaseFirestore.getInstance();
-        getUserInfo(); // get empty data
-        setUserInfo(); // set data
-        getUserInfo(); // get full data
     }
 
-    public void getUserInfo(){
-        firestore.collection("users").document("Jose")
+    @SuppressLint("NewApi")
+    public void getUserInfo(String email, Consumer<User> callback, Runnable error){
+        firestore.collection("users").document(email)
                 .get().addOnCompleteListener((task) -> {
                     DocumentSnapshot doc = task.getResult();
                     if(doc.exists()){
                         Log.i("Database", doc.getString("Name"));
+                        callback.accept(doc.toObject(User.class));
                     }else{
-                        Log.i("Database", "Doc not found");
+                        Log.i("Database", "Email [" + email + "] not found");
+                        error.run();
                     }
                 });
 
     }
 
-    public void setUserInfo(){
+    public void setUserInfo(User user, String email){
         // Create a Map to store the data we want to set
         Map<String, Object> docData = new HashMap<>();
-        docData.put("Name", "Jose");
+        docData.put("Name", user.getName());
+        docData.put("AboutMe", user.getAboutMe());
+        docData.put("Location", user.getLocation());
+        docData.put("LikedSongs", user.getLikedSongs());
+        docData.put("Matches", user.getMatches());
+        docData.put("ProfileImageURI", user.getImageUri());
+        docData.put("ViewedSongs", user.getViewedSongs());
         // Add a new document (asynchronously) in collection "cities" with id "LA"
-        Task future = firestore.collection("users").document("Jose").set(docData);
+        Task future = firestore.collection("users").document(email).set(docData);
         future.addOnCompleteListener((task) -> {
             Log.i("Database","Update time : " + future.getResult());
-            getUserInfo();
         });
         // future.get() blocks on response
-
     }
 
 }
