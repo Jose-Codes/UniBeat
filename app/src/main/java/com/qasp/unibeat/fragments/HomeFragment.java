@@ -1,37 +1,30 @@
 package com.qasp.unibeat.fragments;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.ImageButton;
 
 import com.qasp.unibeat.R;
-import com.spotify.android.appremote.api.ConnectionParams;
-import com.spotify.android.appremote.api.Connector;
-import com.spotify.android.appremote.api.SpotifyAppRemote;
-import com.spotify.protocol.types.Image;
-import com.spotify.protocol.types.Track;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 public class HomeFragment extends Fragment {
 
-    Button btnGenreRock;
-    Button btnGenreCountry;
+    ImageButton btnGenreRock;
+    ImageButton btnGenreCountry;
+    ImageButton btnGenreRnb;
+    ImageButton btnGenreBlues;
+    ImageButton btnGenreDecades;
+    ImageButton btnGenreHipHop;
+    ImageButton btnGenreJazz;
+    ImageButton btnGenrePunk;
+    ImageButton btnGenreMood;
+    ImageButton btnGenreLatino;
 
     // The onCreateView method is called when Fragment should create its View object hierarchy,
     @Override
@@ -45,31 +38,87 @@ public class HomeFragment extends Fragment {
     // Any view setup should occur here.  E.g., view lookups and attaching view listeners.
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        btnGenreCountry = view.findViewById(R.id.btnGenreCountry);
-        btnGenreRock = view.findViewById(R.id.btnGenreRock);
+        btnGenreCountry = view.findViewById(R.id.btnCountry);
+        btnGenreRock = view.findViewById(R.id.btnRock);
+        ImageButton btnGenreRnb = view.findViewById(R.id.btnRnb);
+        ImageButton btnGenreBlues = view.findViewById(R.id.btnBlues);
+        ImageButton btnGenreDecades = view.findViewById(R.id.btnDecades);
+        ImageButton btnGenreHipHop = view.findViewById(R.id.btnHipHop);
+        ImageButton btnGenreJazz = view.findViewById(R.id.btnJazz);
+        ImageButton btnGenrePunk = view.findViewById(R.id.btnPunk);
+        ImageButton btnGenreMood = view.findViewById(R.id.btnMood);
+        ImageButton btnGenreLatino = view.findViewById(R.id.btnLatino);
+
 
         btnGenreCountry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PlayerFragment playerFragment = new PlayerFragment();
-                Bundle args = new Bundle();
-                args.putString("Genre", "Country");
-                playerFragment.setArguments(args);
-                //Inflate the fragment
-                getFragmentManager().beginTransaction().replace(R.id.flContainer, playerFragment).commit();
+               selectGenre("Country");
             }
         });
-
         btnGenreRock.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PlayerFragment playerFragment = new PlayerFragment();
-                Bundle args = new Bundle();
-                args.putString("Genre", "Rock");
-                playerFragment.setArguments(args);
-                //Inflate the fragment
-                getFragmentManager().beginTransaction().replace(R.id.flContainer, playerFragment).commit();
+                selectGenre("Rock");
             }
         });
+        btnGenreRnb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectGenre("Rnb");
+            }
+        });
+        btnGenreBlues.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectGenre("Blues");
+            }
+        });
+        btnGenreDecades.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectGenre("Decades");
+            }
+        });
+        btnGenreHipHop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectGenre("HipHop");
+            }
+        });
+        btnGenreJazz.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectGenre("Jazz");
+            }
+        });
+        btnGenrePunk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectGenre("Punk");
+            }
+        });
+        btnGenreMood.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectGenre("Mood");
+            }
+        });
+        btnGenreLatino.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectGenre("Latino");
+            }
+        });
+
+    }
+
+    private void selectGenre(String genre){
+        PlayerFragment playerFragment = new PlayerFragment();
+        Bundle args = new Bundle();
+        args.putString("Genre", genre);
+        playerFragment.setArguments(args);
+        //Inflate the fragment
+        getFragmentManager().beginTransaction().replace(R.id.flContainer, playerFragment).commit();
     }
 }
