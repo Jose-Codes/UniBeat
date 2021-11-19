@@ -278,28 +278,28 @@ public class PlayerFragment extends Fragment {
                 changeColorsAndConnect(R.color.rock, "rock.txt");
                 break;
             case "Rnb":
-                changeColorsAndConnect(R.color.rock, "rock.txt");
+                changeColorsAndConnect(R.color.rock, "rnb.txt");
                 break;
             case "Blues":
-                changeColorsAndConnect(R.color.rock, "rock.txt");
+                changeColorsAndConnect(R.color.rock, "blues.txt");
                 break;
             case "Decades":
-                changeColorsAndConnect(R.color.rock, "rock.txt");
+                changeColorsAndConnect(R.color.rock, "decades.txt");
                 break;
             case "HipHop":
-                changeColorsAndConnect(R.color.rock, "rock.txt");
+                changeColorsAndConnect(R.color.rock, "hiphop.txt");
                 break;
             case "Jazz":
-                changeColorsAndConnect(R.color.rock, "rock.txt");
+                changeColorsAndConnect(R.color.rock, "jazz.txt");
                 break;
             case "Punk":
-                changeColorsAndConnect(R.color.rock, "rock.txt");
+                changeColorsAndConnect(R.color.rock, "punk.txt");
                 break;
             case "Mood":
-                changeColorsAndConnect(R.color.rock, "rock.txt");
+                changeColorsAndConnect(R.color.rock, "mood.txt");
                 break;
             case "Latino":
-                changeColorsAndConnect(R.color.rock, "rock.txt");
+                changeColorsAndConnect(R.color.rock, "latino.txt");
                 break;
         }
     }
@@ -311,7 +311,7 @@ public class PlayerFragment extends Fragment {
         mSeekBar.getThumb().setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
         btnDone.setTextColor(color);
         btnStop.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
-        connected("country.txt");
+        connected(textFile.toString());
     }
 
     class TrackProgressBar {
