@@ -22,6 +22,9 @@ genre and explore new songs. They can swipe left or right based on whether or no
 
 ## Build Progress
 ### Sprint 2
+<img src="Part3_Walkthrough.gif" width=600>
+
+### Sprint 2
 <img src="Part2_Walkthrough.gif" width=600>
 
 ### Sprint 1
