@@ -21,6 +21,9 @@ genre and explore new songs. They can swipe left or right based on whether or no
 ## Product Spec
 
 ## Build Progress
+### Sprint 3
+<img src="Part3_Walkthrough.gif" width=600>
+
 ### Sprint 2
 <img src="Part2_Walkthrough.gif" width=600>
 
@@ -32,7 +35,9 @@ genre and explore new songs. They can swipe left or right based on whether or no
 
 **Required Must-have Stories**
 
-* [ ] Users can register for an account 
+* [x] Users can register for an account 
+* [x] User can edit their profile
+* [x] UI Theming of Home Page
 * [x] Users can log in to their account
 * [X] Users can authorize spotify to use our app
 * [X] User must pick genre before entering the songfinder
