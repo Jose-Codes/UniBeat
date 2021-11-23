@@ -173,6 +173,11 @@ public class MainActivity extends AppCompatActivity {
             }, () -> {
                Log.i(TAG, "User does not have an account");
             });
+            db.getMessages("josepujol21@gmail.com", "josepujol21@gmail.com", (chatRoom) -> {
+                Log.i(TAG, "Made it to main for getMessages");
+            }, () -> {
+                Log.i(TAG, "Got an error is running.");
+            });
         }
         else {
             signIn();

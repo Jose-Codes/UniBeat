@@ -12,11 +12,11 @@ import com.google.firestore.v1.WriteResult;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 
 public class Database {
-
 
     FirebaseFirestore firestore;
 
@@ -56,6 +56,21 @@ public class Database {
             Log.i("Database","Update time : " + future.getResult());
         });
         // future.get() blocks on response
+    }
+
+    public void getMessages(String ownerEmail, String otherEmail, Consumer<ChatRoom> callback, Runnable error) {
+        firestore.collection("users").document(ownerEmail).collection("messages").document("Email")
+                    .get().addOnCompleteListener((task) -> {
+                DocumentSnapshot doc = task.getResult();
+                if(doc.exists()) {
+                    Log.i("Database", "Getting messages and exists");
+                    Log.i("Database", "Type of data: " + doc.getData().get(otherEmail).getClass());
+                    callback.accept(null);
+                }else{
+                    Log.i("Database", "No messages found");
+                    error.run();
+                }
+            });
     }
 
 }
