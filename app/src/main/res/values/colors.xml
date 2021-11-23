@@ -10,4 +10,12 @@
     <color name="unibeatred">#FD0E42</color>
     <color name="country">#CA8A6C</color>
     <color name="rock">#939393</color>
+    <color name="rnb">#8C3F3F</color>
+    <color name="blues">#3967DA</color>
+    <color name="pop">#FF69A9</color>
+    <color name="hiphop">#5B37DC</color>
+    <color name="jazz">#FF7C40</color>
+    <color name="punk">#8C0F0F</color>
+    <color name="mood">#FFBE4D</color>
+    <color name="latino">#36AF20</color>
 </resources>
