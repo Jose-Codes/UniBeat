@@ -1,7 +1,10 @@
 package com.qasp.unibeat.firebase;
 
 import android.annotation.SuppressLint;
+import android.os.Build;
 import android.util.Log;
+
+import androidx.annotation.RequiresApi;
 
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -59,13 +62,13 @@ public class Database {
     }
 
     public void getMessages(String ownerEmail, String otherEmail, Consumer<ChatRoom> callback, Runnable error) {
-        firestore.collection("users").document(ownerEmail).collection("messages").document("Email")
+        firestore.collection("users").document(ownerEmail).collection("Messages").document(otherEmail)
                     .get().addOnCompleteListener((task) -> {
                 DocumentSnapshot doc = task.getResult();
                 if(doc.exists()) {
                     Log.i("Database", "Getting messages and exists");
-                    Log.i("Database", "Type of data: " + doc.getData().get(otherEmail).getClass());
-                    callback.accept(null);
+                    ChatRoom chatRoom = new ChatRoom( (List<String>) doc.getData().get("myMessage"), (List<String>) doc.getData().get("otherMessage"));
+                    callback.accept(chatRoom);
                 }else{
                     Log.i("Database", "No messages found");
                     error.run();

@@ -49,9 +49,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.function.Consumer;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static MainActivity MAIN_ACTIVITY;
     private static final String CLIENT_ID = "eadf0460915145b2b48616ffdd35476a";
     private static final String REDIRECT_URI = "com.qasp.unibeat://callback";
     private SpotifyAppRemote mSpotifyAppRemote;
@@ -72,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MAIN_ACTIVITY = this;
         setContentView(R.layout.activity_main);
         bottomNavigationView = findViewById(R.id.bottomNavigation);
 
@@ -126,6 +129,9 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.setSelectedItemId(R.id.action_home);
     }
 
+    public static MainActivity getInstance(){
+        return MAIN_ACTIVITY;
+    }
 
     public void signIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
@@ -134,6 +140,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void signOut(){
         mAuth.signOut();
+        mGoogleSignInClient.signOut();
     }
 
     @Override
@@ -175,6 +182,9 @@ public class MainActivity extends AppCompatActivity {
             });
             db.getMessages("josepujol21@gmail.com", "josepujol21@gmail.com", (chatRoom) -> {
                 Log.i(TAG, "Made it to main for getMessages");
+                for (String message : chatRoom.getMyMessages()){
+                    Log.i(TAG, message);
+                }
             }, () -> {
                 Log.i(TAG, "Got an error is running.");
             });

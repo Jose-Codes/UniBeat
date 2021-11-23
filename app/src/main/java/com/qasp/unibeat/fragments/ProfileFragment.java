@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.qasp.unibeat.MainActivity;
 import com.qasp.unibeat.R;
 import com.qasp.unibeat.firebase.SignUp;
 
@@ -44,6 +46,15 @@ public class ProfileFragment extends Fragment {
 
         btnSignOut = view.findViewById(R.id.btnSignOut);
         btnEditProfile = view.findViewById(R.id.btnEditProfile);
+        MainActivity mainActivity = MainActivity.getInstance();
+
+        btnSignOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mainActivity.signOut();
+                mainActivity.signIn();
+            }
+        });
 
         btnEditProfile.setOnClickListener(new View.OnClickListener() {
             @Override
