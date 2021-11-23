@@ -278,28 +278,28 @@ public class PlayerFragment extends Fragment {
                 changeColorsAndConnect(R.color.rock, "rock.txt");
                 break;
             case "Rnb":
-                changeColorsAndConnect(R.color.rock, "rnb.txt");
+                changeColorsAndConnect(R.color.rnb, "rnb.txt");
                 break;
             case "Blues":
-                changeColorsAndConnect(R.color.rock, "blues.txt");
+                changeColorsAndConnect(R.color.blues, "blues.txt");
                 break;
             case "Decades":
-                changeColorsAndConnect(R.color.rock, "decades.txt");
+                changeColorsAndConnect(R.color.pop, "decades.txt");
                 break;
             case "HipHop":
-                changeColorsAndConnect(R.color.rock, "hiphop.txt");
+                changeColorsAndConnect(R.color.hiphop, "hiphop.txt");
                 break;
             case "Jazz":
-                changeColorsAndConnect(R.color.rock, "jazz.txt");
+                changeColorsAndConnect(R.color.jazz, "jazz.txt");
                 break;
             case "Punk":
-                changeColorsAndConnect(R.color.rock, "punk.txt");
+                changeColorsAndConnect(R.color.punk, "punk.txt");
                 break;
             case "Mood":
-                changeColorsAndConnect(R.color.rock, "mood.txt");
+                changeColorsAndConnect(R.color.mood, "mood.txt");
                 break;
             case "Latino":
-                changeColorsAndConnect(R.color.rock, "latino.txt");
+                changeColorsAndConnect(R.color.latino, "latino.txt");
                 break;
         }
     }
