@@ -40,6 +40,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class PlayerFragment extends Fragment {
 
@@ -67,6 +70,8 @@ public class PlayerFragment extends Fragment {
     AppCompatSeekBar mSeekBar;
     TrackProgressBar mTrackProgressBar;
 
+    ImageView ivTransitionImage;
+    boolean hasAnimated = false;
     // The onCreateView method is called when Fragment should create its View object hierarchy,
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -80,7 +85,7 @@ public class PlayerFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        ivTransitionImage = view.findViewById(R.id.ivTransitionImage);
         mSeekBar = view.findViewById(R.id.seekBar);
         mSeekBar.setEnabled(false);
         //mSeekBar.getProgressDrawable().setColorFilter(getResources().getColor(R.color.unibeatred), PorterDuff.Mode.SRC_ATOP);
@@ -185,7 +190,6 @@ public class PlayerFragment extends Fragment {
                     final Track track = playerState.track;
                     if (track != null) {
                         mSeekBar.setMax((int) playerState.track.duration);
-                        Log.i(TAG, String.valueOf((int) playerState.track.duration));
                         Log.d("MainActivity", track.name + " by " + track.artist.name + " Song Image URI: " + track.imageUri);
                         mSpotifyAppRemote
                                 .getImagesApi()
@@ -198,6 +202,20 @@ public class PlayerFragment extends Fragment {
                     }
                     tvSongName.setText(track.name);
                     tvArtistName.setText("by: " + track.artist.name);
+
+                    while(tvArtistName.getText() == "by: Song Artist" && ivSongImage.getDrawable() == null){
+                        //Timer
+                    }
+
+                    if(!hasAnimated){
+                        // Load the animation like this
+                        Animation animSlide = AnimationUtils.loadAnimation(getContext(),
+                                R.anim.slide);
+
+                        // Start the animation like this
+                        ivTransitionImage.startAnimation(animSlide);
+                        hasAnimated = true;
+                    }
 
                     // Update progressbar
                     if (playerState.playbackSpeed > 0) {
@@ -244,6 +262,7 @@ public class PlayerFragment extends Fragment {
                     });
                 }
             };
+
 
     private void connected(String fileName) {
 
