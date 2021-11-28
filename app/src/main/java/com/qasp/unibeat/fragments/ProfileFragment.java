@@ -1,6 +1,7 @@
 package com.qasp.unibeat.fragments;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.qasp.unibeat.MainActivity;
@@ -21,7 +23,7 @@ import com.qasp.unibeat.firebase.SignUp;
 public class ProfileFragment extends Fragment {
 
     Button btnSignOut;
-    Button btnEditProfile;
+    ImageButton btnEditProfile;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -46,15 +48,8 @@ public class ProfileFragment extends Fragment {
 
         btnSignOut = view.findViewById(R.id.btnSignOut);
         btnEditProfile = view.findViewById(R.id.btnEditProfile);
-        MainActivity mainActivity = MainActivity.getInstance();
 
-        btnSignOut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mainActivity.signOut();
-                mainActivity.signIn();
-            }
-        });
+
 
         btnEditProfile.setOnClickListener(new View.OnClickListener() {
             @Override

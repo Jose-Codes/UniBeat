@@ -19,6 +19,7 @@ public class SignUp extends AppCompatActivity {
     EditText edtName;
     EditText edtLocation;
     ImageButton btnSignUp;
+    ImageButton btnSignOut;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +30,18 @@ public class SignUp extends AppCompatActivity {
         edtName = findViewById(R.id.edtName);
         edtLocation = findViewById(R.id.edtLocation);
         btnSignUp = findViewById(R.id.btnEditProfile);
-
+        btnSignOut = findViewById(R.id.btnSignOut);
+        MainActivity mainActivity = MainActivity.getInstance();
         Intent i = new Intent(SignUp.this, MainActivity.class);
+
+        btnSignOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(SignUp.this,MainActivity.class));
+                mainActivity.signOut();
+                mainActivity.signIn();
+            }
+        });
 
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
