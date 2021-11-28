@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.qasp.unibeat.MainActivity;
@@ -17,7 +18,7 @@ public class SignUp extends AppCompatActivity {
     EditText edtEmail;
     EditText edtName;
     EditText edtLocation;
-    Button btnSignUp;
+    ImageButton btnSignUp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

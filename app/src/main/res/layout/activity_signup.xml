@@ -1,96 +1,150 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <View
+        android:id="@+id/rectangle_1"
+        android:layout_width="303dp"
+        android:layout_height="60dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="263dp"
+        android:background="@drawable/rectangle" />
+
+    <View
+        android:id="@+id/rectangle_2"
+        android:layout_width="303dp"
+        android:layout_height="60dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="43dp"
+        android:layout_marginTop="415dp"
+        android:background="@drawable/rectangle" />
+
+    <View
+        android:id="@+id/rectangle_"
+        android:layout_width="303dp"
+        android:layout_height="60dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="41dp"
+        android:layout_marginTop="339dp"
+        android:background="@drawable/rectangle" />
+
+    <ImageView
+        android:id="@+id/ivBackground"
+        android:layout_width="match_parent"
+        android:layout_height="450dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="-250dp"
+        android:layout_marginBottom="350dp"
+        android:src="@drawable/background" />
 
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="158dp"
         android:layout_height="50dp"
+        android:layout_below="@+id/ivBackground"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="124dp"
-        android:layout_marginTop="35dp"
         android:layout_centerHorizontal="true"
+        android:layout_marginStart="124dp"
+        android:layout_marginTop="-350dp"
         android:text="Edit Profile"
         android:textSize="24sp"
         tools:layout_editor_absoluteX="47dp"
         tools:layout_editor_absoluteY="33dp" />
 
-    <TextView
-        android:id="@+id/tvEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="22dp"
-        android:layout_marginTop="79dp"
-        android:text="Email:" />
-
     <EditText
         android:id="@+id/edtEmail"
-        android:layout_width="wrap_content"
+        android:layout_width="283dp"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/tvTitle"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="76dp"
-        android:layout_marginTop="62dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="18dp"
         android:ems="10"
+        android:fontFamily="@font/quicksand"
         android:hint="Email"
-        android:inputType="textPersonName" />
-
-    <TextView
-        android:id="@+id/tvName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="21dp"
-        android:layout_marginTop="133dp"
-        android:text="Name:" />
+        android:inputType="textPersonName"
+        android:textColorHighlight="#FD0E42"
+        android:textColorLink="#FD0E42"
+        />
 
     <EditText
         android:id="@+id/edtName"
-        android:layout_width="wrap_content"
+        android:layout_width="295dp"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/edtEmail"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="77dp"
-        android:layout_marginTop="119dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="46dp"
+        android:layout_marginTop="29dp"
         android:ems="10"
+        android:fontFamily="@font/quicksand"
         android:hint="Name"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
 
-    <TextView
-        android:id="@+id/tvLocation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="194dp"
-        android:text="Location" />
+        android:textColorHighlight="#FD0E42"
+ />
 
     <EditText
         android:id="@+id/edtLocation"
-        android:layout_width="wrap_content"
+        android:layout_width="288dp"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/edtName"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="77dp"
-        android:layout_marginTop="181dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="47dp"
+        android:layout_marginTop="31dp"
         android:ems="10"
+        android:fontFamily="@font/quicksand"
         android:hint="Location"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:textColorHighlight="#FD0E42"
+        android:textColorLink="#FD0E42"
+      />
 
-    <Button
+    <ImageButton
         android:id="@+id/btnEditProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="137dp"
-        android:layout_marginTop="268dp"
-        android:text="Sign Up" />
+        android:layout_below="@+id/rectangle_2"
+        android:layout_marginStart="-47dp"
+        android:layout_marginTop="41dp"
+        android:layout_toEndOf="@+id/rectangle_2"
+        android:background="@null"
+        app:srcCompat="@drawable/arrowbtn"
+        />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/tvTitle"
+        android:layout_alignBottom="@+id/ivBackground"
+        android:layout_marginStart="-78dp"
+        android:layout_marginBottom="73dp"
+        app:srcCompat="@drawable/welcome" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="179dp"
+        android:layout_height="66dp"
+        android:layout_alignStart="@+id/edtLocation"
+        android:layout_alignTop="@+id/btnEditProfile"
+        android:layout_marginStart="-6dp"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/quicksand_bold"
+        android:text="Complete"
+        android:textSize="35sp" />
+
 </RelativeLayout>
