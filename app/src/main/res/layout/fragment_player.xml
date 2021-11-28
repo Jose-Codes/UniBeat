@@ -80,6 +80,7 @@
         android:background="@android:color/transparent"
         android:text="I'm done"
         android:textColor="#9a0a0a"
+        android:stateListAnimator="@null"
         android:textSize="14sp" />
 
     <ImageView
@@ -171,6 +172,12 @@
             android:src="@drawable/pauseimage" />
     </RelativeLayout>
 
+    <ImageView
+        android:id="@+id/ivTransitionImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/unibeatloadingscreen" />
 
 
 </RelativeLayout>

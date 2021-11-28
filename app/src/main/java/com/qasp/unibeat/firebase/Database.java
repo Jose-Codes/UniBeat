@@ -1,7 +1,10 @@
 package com.qasp.unibeat.firebase;
 
 import android.annotation.SuppressLint;
+import android.os.Build;
 import android.util.Log;
+
+import androidx.annotation.RequiresApi;
 
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -12,11 +15,11 @@ import com.google.firestore.v1.WriteResult;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 
 public class Database {
-
 
     FirebaseFirestore firestore;
 
@@ -56,6 +59,21 @@ public class Database {
             Log.i("Database","Update time : " + future.getResult());
         });
         // future.get() blocks on response
+    }
+
+    public void getMessages(String ownerEmail, String otherEmail, Consumer<ChatRoom> callback, Runnable error) {
+        firestore.collection("users").document(ownerEmail).collection("Messages").document(otherEmail)
+                    .get().addOnCompleteListener((task) -> {
+                DocumentSnapshot doc = task.getResult();
+                if(doc.exists()) {
+                    Log.i("Database", "Getting messages and exists");
+                    ChatRoom chatRoom = new ChatRoom( (List<String>) doc.getData().get("myMessage"), (List<String>) doc.getData().get("otherMessage"));
+                    callback.accept(chatRoom);
+                }else{
+                    Log.i("Database", "No messages found");
+                    error.run();
+                }
+            });
     }
 
 }

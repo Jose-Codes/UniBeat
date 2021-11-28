@@ -91,7 +91,7 @@
             android:layout_marginStart="15dp"
             android:background="@null"
             android:contentDescription="@string/genre"
-            android:src="@drawable/genredecades" />
+            android:src="@drawable/genrepop" />
 
     </LinearLayout>
 

@@ -1,5 +1,6 @@
 package com.qasp.unibeat.fragments;
 
+import android.app.ActivityOptions;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
+import com.qasp.unibeat.MainActivity;
 import com.qasp.unibeat.R;
 
 public class HomeFragment extends Fragment {
