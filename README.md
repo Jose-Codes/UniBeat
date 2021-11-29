@@ -21,6 +21,10 @@ genre and explore new songs. They can swipe left or right based on whether or no
 ## Product Spec
 
 ## Build Progress
+
+### Sprint 4
+<img src="walkthrough4.gif" width=400>
+
 ### Sprint 3
 <img src="Part3_Walkthrough.gif" width=600>
 
